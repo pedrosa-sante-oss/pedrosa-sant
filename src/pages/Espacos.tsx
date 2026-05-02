@@ -29,7 +29,7 @@ const Espacos = () => {
     <>
       {/* HERO */}
       <section className="relative flex min-h-[50vh] items-center justify-center overflow-hidden px-4 py-24">
-        <img src="/renders/recepcao-04.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+        <img src="/renders/recepcao-nova.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
         <div className="absolute inset-0 bg-primary/72" aria-hidden="true" />
         <span className="absolute text-[20rem] md:text-[35rem] font-barlow font-extrabold text-gold opacity-[0.04] select-none pointer-events-none leading-none z-10">§</span>
         <div className="relative z-10 text-center max-w-2xl animate-fade-in-up">

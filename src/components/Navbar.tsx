@@ -15,8 +15,8 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-8">
-        <Link to="/" className="font-barlow text-sm font-light tracking-[0.35em] uppercase">
-          PEDROSA<span className="font-bold">SANTÉ</span>
+        <Link to="/">
+          <img src="/renders/Logo 1_White.png" alt="Pedrosa Santé" className="h-5 md:h-6" />
         </Link>
 
         {/* Desktop */}
