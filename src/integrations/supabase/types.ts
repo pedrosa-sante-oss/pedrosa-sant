@@ -74,6 +74,225 @@ export type Database = {
         }
         Relationships: []
       }
+      rooms: {
+        Row: {
+          id: string
+          name: string
+          description: string | null
+          photo_url: string | null
+          active: boolean
+          sort_order: number
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          description?: string | null
+          photo_url?: string | null
+          active?: boolean
+          sort_order?: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          description?: string | null
+          photo_url?: string | null
+          active?: boolean
+          sort_order?: number
+          created_at?: string
+        }
+        Relationships: []
+      }
+      tenants: {
+        Row: {
+          id: string
+          user_id: string | null
+          name: string
+          email: string
+          phone: string | null
+          specialty: string | null
+          active: boolean
+          invite_token: string
+          notes: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id?: string | null
+          name: string
+          email: string
+          phone?: string | null
+          specialty?: string | null
+          active?: boolean
+          invite_token?: string
+          notes?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string | null
+          name?: string
+          email?: string
+          phone?: string | null
+          specialty?: string | null
+          active?: boolean
+          invite_token?: string
+          notes?: string | null
+          created_at?: string
+        }
+        Relationships: []
+      }
+      bookings: {
+        Row: {
+          id: string
+          room_id: string
+          tenant_id: string
+          date: string
+          period: "manha" | "tarde" | "dia_todo"
+          status: "pending" | "confirmed" | "cancelled"
+          notes: string | null
+          requested_by: "tenant" | "secretary"
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          room_id: string
+          tenant_id: string
+          date: string
+          period: "manha" | "tarde" | "dia_todo"
+          status?: "pending" | "confirmed" | "cancelled"
+          notes?: string | null
+          requested_by?: "tenant" | "secretary"
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          room_id?: string
+          tenant_id?: string
+          date?: string
+          period?: "manha" | "tarde" | "dia_todo"
+          status?: "pending" | "confirmed" | "cancelled"
+          notes?: string | null
+          requested_by?: "tenant" | "secretary"
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      bank_accounts: {
+        Row: {
+          id: string
+          name: string
+          bank: string | null
+          active: boolean
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          bank?: string | null
+          active?: boolean
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          bank?: string | null
+          active?: boolean
+          created_at?: string
+        }
+        Relationships: []
+      }
+      payments: {
+        Row: {
+          id: string
+          booking_id: string | null
+          amount: number
+          due_date: string | null
+          paid_at: string | null
+          bank_account_id: string | null
+          status: "pending" | "paid" | "overdue"
+          notes: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          booking_id?: string | null
+          amount: number
+          due_date?: string | null
+          paid_at?: string | null
+          bank_account_id?: string | null
+          status?: "pending" | "paid" | "overdue"
+          notes?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          booking_id?: string | null
+          amount?: number
+          due_date?: string | null
+          paid_at?: string | null
+          bank_account_id?: string | null
+          status?: "pending" | "paid" | "overdue"
+          notes?: string | null
+          created_at?: string
+        }
+        Relationships: []
+      }
+      expenses: {
+        Row: {
+          id: string
+          description: string
+          category: string
+          amount: number
+          date: string
+          bank_account_id: string | null
+          notes: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          description: string
+          category: string
+          amount: number
+          date: string
+          bank_account_id?: string | null
+          notes?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          description?: string
+          category?: string
+          amount?: number
+          date?: string
+          bank_account_id?: string | null
+          notes?: string | null
+          created_at?: string
+        }
+        Relationships: []
+      }
+      app_settings: {
+        Row: {
+          key: string
+          value: string | null
+          updated_at: string
+        }
+        Insert: {
+          key: string
+          value?: string | null
+          updated_at?: string
+        }
+        Update: {
+          key?: string
+          value?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
