@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Wifi, Zap, Droplets, Users, AirVent } from "lucide-react";
-import RoomPlaceholder from "@/components/RoomPlaceholder";
 import LeadFormModal from "@/components/LeadFormModal";
 
 const included = [
@@ -12,9 +11,9 @@ const included = [
 ];
 
 const regularRooms = [
-  { title: "Sala 01", desc: "Sala versátil e ampla, ideal para consultas médicas e atendimentos clínicos. Espaço projetado com foco em conforto e funcionalidade para o profissional de saúde." },
-  { title: "Sala 02", desc: "Ambiente acolhedor e intimista, perfeito para psicologia, nutrição e terapias. Design que favorece a privacidade e o bem-estar do paciente." },
-  { title: "Sala 03", desc: "Espaço funcional e elegante para diversas especialidades de saúde. Infraestrutura pensada para atendimentos que exigem sofisticação." },
+  { title: "Sala 01", desc: "Sala versátil e ampla, ideal para consultas médicas e atendimentos clínicos. Espaço projetado com foco em conforto e funcionalidade para o profissional de saúde.", image: "/renders/consultorio.jpg" },
+  { title: "Sala 02", desc: "Ambiente acolhedor e intimista, perfeito para psicologia, nutrição e terapias. Design que favorece a privacidade e o bem-estar do paciente.", image: "/renders/consultorio.jpg" },
+  { title: "Sala 03", desc: "Espaço funcional e elegante para diversas especialidades de saúde. Infraestrutura pensada para atendimentos que exigem sofisticação.", image: "/renders/consultorio.jpg" },
 ];
 
 const Espacos = () => {
@@ -30,7 +29,9 @@ const Espacos = () => {
     <>
       {/* HERO */}
       <section className="relative flex min-h-[50vh] items-center justify-center overflow-hidden px-4 py-24">
-        <span className="absolute text-[20rem] md:text-[35rem] font-barlow font-extrabold text-gold opacity-[0.04] select-none pointer-events-none leading-none">§</span>
+        <img src="/renders/recepcao-04.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+        <div className="absolute inset-0 bg-primary/72" aria-hidden="true" />
+        <span className="absolute text-[20rem] md:text-[35rem] font-barlow font-extrabold text-gold opacity-[0.04] select-none pointer-events-none leading-none z-10">§</span>
         <div className="relative z-10 text-center max-w-2xl animate-fade-in-up">
           <h1 className="font-barlow font-extrabold text-3xl md:text-5xl mb-4">Quatro ambientes de <span className="text-lima">alto padrão</span></h1>
           <p className="text-muted-foreground font-inter text-sm md:text-base">Cada sala foi projetada para oferecer o melhor ambiente para seus pacientes e para o seu trabalho.</p>
@@ -42,7 +43,7 @@ const Espacos = () => {
         <section key={room.title} className={`py-20 px-4 ${i % 2 === 1 ? "bg-surface" : ""}`}>
           <div className={`container mx-auto grid md:grid-cols-2 gap-12 items-center ${i % 2 === 1 ? "md:direction-rtl" : ""}`}>
             <div className={i % 2 === 1 ? "md:order-2" : ""}>
-              <RoomPlaceholder label={room.title} />
+              <img src={room.image} alt={room.title} className="w-full aspect-video object-cover" />
             </div>
             <div className={i % 2 === 1 ? "md:order-1" : ""}>
               <h2 className="font-barlow font-extrabold text-2xl md:text-3xl mb-4">{room.title}</h2>
@@ -72,7 +73,7 @@ const Espacos = () => {
       <section className="py-20 px-4 bg-card">
         <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <RoomPlaceholder label="Sala Odontológica" />
+            <img src="/renders/sala-dentista.jpg" alt="Sala Odontológica" className="w-full aspect-video object-cover" />
           </div>
           <div>
             <span className="text-xs font-inter text-lima tracking-wider uppercase mb-2 block">Destaque</span>

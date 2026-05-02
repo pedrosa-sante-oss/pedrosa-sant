@@ -2,12 +2,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Award, Heart, Sparkles } from "lucide-react";
-import RoomPlaceholder from "@/components/RoomPlaceholder";
 import LeadFormModal from "@/components/LeadFormModal";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { Award, Heart, Sparkles } from "lucide-react";
 
 const pillars = [
   { icon: Award, title: "Excelência", desc: "Alto nível de qualificação e um espaço que transmite autoridade e confiança." },
@@ -16,10 +14,10 @@ const pillars = [
 ];
 
 const rooms = [
-  { title: "Sala 01", desc: "Sala versátil e ampla, ideal para consultas médicas e atendimentos clínicos." },
-  { title: "Sala 02", desc: "Ambiente acolhedor, perfeito para psicologia, nutrição e terapias." },
-  { title: "Sala 03", desc: "Espaço funcional e elegante para diversas especialidades de saúde." },
-  { title: "Sala Odontológica", desc: "Completa para atendimento odontológico de alto padrão." },
+  { title: "Sala 01", desc: "Sala versátil e ampla, ideal para consultas médicas e atendimentos clínicos.", image: "/renders/consultorio.jpg" },
+  { title: "Sala 02", desc: "Ambiente acolhedor, perfeito para psicologia, nutrição e terapias.", image: "/renders/consultorio.jpg" },
+  { title: "Sala 03", desc: "Espaço funcional e elegante para diversas especialidades de saúde.", image: "/renders/consultorio.jpg" },
+  { title: "Sala Odontológica", desc: "Completa para atendimento odontológico de alto padrão.", image: "/renders/sala-dentista.jpg" },
 ];
 
 const specialties = [
@@ -63,7 +61,14 @@ const Index = () => {
     <>
       {/* HERO */}
       <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden px-4">
-        <span className="absolute text-[30rem] md:text-[50rem] font-barlow font-extrabold text-gold opacity-[0.04] select-none pointer-events-none leading-none" aria-hidden="true">§</span>
+        <img
+          src="/renders/recepcao-01.jpg"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 bg-primary/72" aria-hidden="true" />
+        <span className="absolute text-[30rem] md:text-[50rem] font-barlow font-extrabold text-gold opacity-[0.04] select-none pointer-events-none leading-none z-10" aria-hidden="true">§</span>
         <div className="relative z-10 text-center max-w-3xl mx-auto animate-fade-in-up">
           <h1 className="font-barlow font-extrabold text-3xl md:text-5xl lg:text-6xl leading-tight mb-6">
             O padrão não é um diferencial,<br />é o nosso <span className="text-lima">padrão</span>.
@@ -121,7 +126,7 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-6">
             {rooms.map((room) => (
               <div key={room.title} className="group border border-border bg-background overflow-hidden hover:border-lima/30 transition-colors">
-                <RoomPlaceholder />
+                <img src={room.image} alt={room.title} className="w-full aspect-[4/3] object-cover" />
                 <div className="p-6">
                   <h3 className="font-barlow font-bold text-lg mb-2">{room.title}</h3>
                   <p className="text-muted-foreground text-xs font-inter mb-4 leading-relaxed">{room.desc}</p>
