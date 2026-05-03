@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,14 +7,21 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Calendar, Building2, Star, Clock, MapPin, Stethoscope, Sparkles, Shield, Users, ChevronRight } from "lucide-react";
 
-// Altere o número do WhatsApp aqui
-const WHATSAPP = "5587999999999";
-
 const Index = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalRoom, setModalRoom] = useState("");
   const [ctaLoading, setCtaLoading] = useState(false);
   const [ctaForm, setCtaForm] = useState({ name: "", specialty: "", phone: "" });
+  const [whatsapp, setWhatsapp] = useState("");
+
+  useEffect(() => {
+    supabase
+      .from("app_settings")
+      .select("value")
+      .eq("key", "whatsapp_number")
+      .single()
+      .then(({ data }) => { if (data?.value) setWhatsapp(data.value); });
+  }, []);
 
   const openModal = (room?: string) => {
     setModalRoom(room || "");
@@ -76,7 +83,7 @@ const Index = () => {
               <Calendar className="h-4 w-4" />
               Quero agendar uma visita
             </Button>
-            <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noopener noreferrer">
+            <a href={whatsapp ? `https://wa.me/${whatsapp}` : "#"} target="_blank" rel="noopener noreferrer">
               <Button
                 variant="outline"
                 size="lg"
@@ -500,7 +507,7 @@ const Index = () => {
           <p className="text-primary-foreground/60 text-xs font-inter">
             Prefere falar agora?{" "}
             <a
-              href={`https://wa.me/${WHATSAPP}`}
+              href={whatsapp ? `https://wa.me/${whatsapp}` : "#"}
               target="_blank"
               rel="noopener noreferrer"
               className="underline underline-offset-2 hover:text-primary-foreground transition-colors"

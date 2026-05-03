@@ -13,7 +13,9 @@ interface BankAccount { id: string; name: string; bank: string | null; active: b
 const AdminConfiguracoes = () => {
   const [webhookUrl, setWebhookUrl] = useState("");
   const [apiKey, setApiKey] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
   const [savingWebhook, setSavingWebhook] = useState(false);
+  const [savingContact, setSavingContact] = useState(false);
   const [testing, setTesting] = useState(false);
   const [bankAccounts, setBankAccounts] = useState<BankAccount[]>([]);
   const [bankForm, setBankForm] = useState({ name: "", bank: "" });
@@ -23,11 +25,12 @@ const AdminConfiguracoes = () => {
     const { data: settings } = await supabase
       .from("app_settings")
       .select("key, value")
-      .in("key", ["datacrazy_webhook_url", "datacrazy_api_key"]);
+      .in("key", ["datacrazy_webhook_url", "datacrazy_api_key", "whatsapp_number"]);
 
     if (settings) {
       setWebhookUrl(settings.find((s) => s.key === "datacrazy_webhook_url")?.value ?? "");
       setApiKey(settings.find((s) => s.key === "datacrazy_api_key")?.value ?? "");
+      setWhatsapp(settings.find((s) => s.key === "whatsapp_number")?.value ?? "");
     }
 
     const { data: accounts } = await supabase.from("bank_accounts").select("*").order("created_at");
@@ -45,6 +48,16 @@ const AdminConfiguracoes = () => {
     ]);
     setSavingWebhook(false);
     toast.success("Configurações de webhook salvas.");
+  };
+
+  const handleSaveContact = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSavingContact(true);
+    await supabase.from("app_settings").upsert([
+      { key: "whatsapp_number", value: whatsapp.replace(/\D/g, ""), updated_at: new Date().toISOString() },
+    ]);
+    setSavingContact(false);
+    toast.success("Contato salvo.");
   };
 
   const handleTestWebhook = async () => {
@@ -96,11 +109,35 @@ const AdminConfiguracoes = () => {
     <div>
       <h1 className="font-barlow font-bold text-xl mb-6">Configurações</h1>
 
-      <Tabs defaultValue="webhook">
+      <Tabs defaultValue="contato">
         <TabsList className="bg-surface border border-border mb-6">
+          <TabsTrigger value="contato" className="text-xs font-inter data-[state=active]:bg-lima/10 data-[state=active]:text-lima">Contato</TabsTrigger>
           <TabsTrigger value="webhook" className="text-xs font-inter data-[state=active]:bg-lima/10 data-[state=active]:text-lima">Webhook CRM</TabsTrigger>
           <TabsTrigger value="contas" className="text-xs font-inter data-[state=active]:bg-lima/10 data-[state=active]:text-lima">Contas Bancárias</TabsTrigger>
         </TabsList>
+
+        {/* CONTATO */}
+        <TabsContent value="contato">
+          <div className="max-w-sm">
+            <p className="text-xs text-muted-foreground font-inter mb-6">
+              Número exibido nos botões de WhatsApp do site. Use o formato com DDI: <span className="text-foreground">5587999999999</span>
+            </p>
+            <form onSubmit={handleSaveContact} className="space-y-4">
+              <div>
+                <label className="text-xs text-muted-foreground font-inter block mb-1">Número do WhatsApp</label>
+                <Input
+                  value={whatsapp}
+                  onChange={(e) => setWhatsapp(e.target.value)}
+                  className="bg-surface border-border font-inter text-sm"
+                  placeholder="5587999999999"
+                />
+              </div>
+              <Button type="submit" disabled={savingContact} className="bg-lima text-primary-foreground hover:bg-lima/90 font-inter text-sm font-semibold">
+                {savingContact ? "Salvando..." : "Salvar"}
+              </Button>
+            </form>
+          </div>
+        </TabsContent>
 
         {/* WEBHOOK */}
         <TabsContent value="webhook">
