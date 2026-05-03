@@ -166,7 +166,13 @@ const QuemSomos = () => {
       </section>
 
       {/* COMO SURGIMOS */}
-      <section className="py-24 px-4 bg-background">
+      <section className="relative overflow-hidden py-24 px-4 bg-background">
+        <img
+          src="/renders/logo do simbolo branco Symbol_02.jpg"
+          alt=""
+          aria-hidden="true"
+          className="absolute right-0 top-1/2 -translate-y-1/2 h-[80%] max-h-[600px] opacity-[0.04] select-none pointer-events-none object-contain"
+        />
         <div className="container mx-auto max-w-4xl">
           <div className="grid md:grid-cols-2 gap-16 items-start">
             <div className="space-y-5">
@@ -217,7 +223,7 @@ const QuemSomos = () => {
       <section className="py-24 px-4 bg-card">
         <div className="container mx-auto max-w-4xl">
           <div className="flex justify-center mb-12">
-            <img src="/renders/Logo 1_White.png" alt="Pedrosa Santé" className="h-8 opacity-40" />
+            <img src="/renders/Logo nome branco 1_white.jpg" alt="Pedrosa Santé" className="h-8 opacity-40" />
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-16">

@@ -34,7 +34,7 @@ const Espacos = () => {
         <span className="absolute text-[20rem] md:text-[35rem] font-barlow font-extrabold text-gold opacity-[0.04] select-none pointer-events-none leading-none z-10">§</span>
         <div className="relative z-10 text-center max-w-2xl animate-fade-in-up">
           <h1 className="font-barlow font-extrabold text-3xl md:text-5xl mb-4">Quatro ambientes de <span className="text-lima">alto padrão</span></h1>
-          <p className="text-muted-foreground font-inter text-sm md:text-base">Cada sala foi projetada para oferecer o melhor ambiente para seus pacientes e para o seu trabalho.</p>
+          <p className="text-foreground/80 font-inter text-sm md:text-base">Cada sala foi projetada para oferecer o melhor ambiente para seus pacientes e para o seu trabalho.</p>
         </div>
       </section>
 
