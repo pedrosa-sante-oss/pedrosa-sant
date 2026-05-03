@@ -197,7 +197,7 @@ const QuemSomos = () => {
               {[
                 { title: "Sala Odontológica", desc: "Equipada por turno para cirurgiões-dentistas, com sala de esterilização inclusa" },
                 { title: "Sala Clínica", desc: "Disponível por turno para medicina, psicologia, nutrição e outras especialidades" },
-                { title: "3 Salas Fixas", desc: "Para profissionais que desejam ter seu próprio espaço e personalizá-lo" },
+                { title: "3 Salas Fixas", desc: "Para profissionais que desejam ter seu próprio espaço. Energia inclusa — instalação de ar-condicionado inverter obrigatória" },
                 { title: "Centro de Formação", desc: "Cursos, mentorias e imersões para profissionais da saúde" },
               ].map((item) => (
                 <div key={item.title} className="flex gap-4 items-start p-4 border border-border bg-surface hover:border-lima/30 transition-colors">

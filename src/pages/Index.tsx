@@ -107,9 +107,9 @@ const Index = () => {
               </div>
               <h3 className="font-barlow font-bold text-xl mb-3">Sala pronta. Reserve e atenda.</h3>
               <p className="text-muted-foreground font-inter text-sm leading-relaxed mb-6">
-                Escolha a data e o turno — manhã, tarde ou dia todo. A sala estará
-                equipada, limpa e pronta quando você chegar. Sem contrato, sem mensalidade.
-                Pague apenas pelo que usar.
+                Escolha a data e o turno — manhã (08h–12h), tarde (14h–18h) ou noite (18h–22h).
+                A sala estará equipada, limpa e pronta quando você chegar.
+                Sem contrato, sem mensalidade. Pague apenas pelo que usar.
               </p>
               <ul className="space-y-2">
                 {[
@@ -150,7 +150,7 @@ const Index = () => {
               <ul className="space-y-2">
                 {[
                   "Espaço exclusivo, personalização total",
-                  "Ar-condicionado inverter incluso",
+                  "Instalação de ar-condicionado inverter obrigatória (energia inclusa no aluguel)",
                   "Recepção compartilhada (até 3 secretárias)",
                   "Copa, banheiros e áreas comuns de alto padrão",
                 ].map((item) => (
@@ -194,7 +194,7 @@ const Index = () => {
               <div className="relative">
                 <img src="/renders/sala-dentista.jpg" alt="Sala Odontológica" className="w-full aspect-[4/3] object-cover" />
                 <span className="absolute top-3 left-3 bg-lima text-primary-foreground text-[10px] font-inter font-semibold px-2 py-1 tracking-wide">
-                  Por turno · Manhã / Tarde / Dia todo
+                  Por turno · 08h–12h / 14h–18h / 18h–22h
                 </span>
               </div>
               <div className="p-6">
@@ -219,7 +219,7 @@ const Index = () => {
               <div className="relative">
                 <img src="/renders/consultorio.jpg" alt="Sala Clínica" className="w-full aspect-[4/3] object-cover" />
                 <span className="absolute top-3 left-3 bg-lima text-primary-foreground text-[10px] font-inter font-semibold px-2 py-1 tracking-wide">
-                  Por turno · Manhã / Tarde / Dia todo
+                  Por turno · 08h–12h / 14h–18h / 18h–22h
                 </span>
               </div>
               <div className="p-6">
@@ -276,7 +276,7 @@ const Index = () => {
                   <p className="text-muted-foreground text-xs font-inter mb-4 leading-relaxed">{room.desc}</p>
                   <div className="flex items-center gap-2 mb-4">
                     <Sparkles className="h-3 w-3 text-lima shrink-0" />
-                    <span className="text-xs text-muted-foreground font-inter">Ar-condicionado inverter incluso</span>
+                    <span className="text-xs text-muted-foreground font-inter">Instalação de ar-condicionado inverter obrigatória</span>
                   </div>
                   <Button variant="outline" size="sm" onClick={() => openModal(room.title)} className="border-lima/40 text-lima hover:bg-lima hover:text-primary-foreground text-xs font-inter">
                     Tenho interesse
@@ -308,7 +308,7 @@ const Index = () => {
               { icon: Users, title: "Recepção para até 3 secretárias", desc: "Tanto para profissionais fixos quanto para quem atende por turno" },
               { icon: Shield, title: "Sala de esterilização", desc: "Inclusa para dentistas, sem custo adicional" },
               { icon: Stethoscope, title: "Copa compartilhada", desc: "Área de descanso e preparo para toda a equipe" },
-              { icon: Sparkles, title: "Ar-condicionado inverter", desc: "Em todas as salas fixas. Clima controlado o ano todo." },
+              { icon: Sparkles, title: "Ar-condicionado inverter", desc: "Obrigatório nas salas fixas. Como a energia é inclusa no aluguel, o inverter protege seu bolso com menor consumo." },
             ].map((item) => (
               <div key={item.title} className="flex gap-4 items-start p-5 border border-border bg-background hover:border-lima/30 transition-colors">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-border rounded">
