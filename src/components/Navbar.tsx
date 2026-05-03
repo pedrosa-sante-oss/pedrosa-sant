@@ -8,6 +8,7 @@ const Navbar = () => {
   const { pathname } = useLocation();
 
   const links = [
+    { to: "/quem-somos", label: "Quem Somos" },
     { to: "/espacos", label: "Os Espaços" },
     { to: "/para-voce", label: "Para Você" },
   ];

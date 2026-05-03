@@ -12,6 +12,7 @@ import Index from "./pages/Index";
 import Espacos from "./pages/Espacos";
 import ParaVoce from "./pages/ParaVoce";
 import Contato from "./pages/Contato";
+import QuemSomos from "./pages/QuemSomos";
 
 // Admin pages
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -48,6 +49,7 @@ const App = () => (
             <Route path="/espacos" element={<Espacos />} />
             <Route path="/para-voce" element={<ParaVoce />} />
             <Route path="/contato" element={<Contato />} />
+            <Route path="/quem-somos" element={<QuemSomos />} />
           </Route>
 
           {/* Admin */}

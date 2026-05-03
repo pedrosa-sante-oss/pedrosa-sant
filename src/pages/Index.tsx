@@ -64,34 +64,21 @@ const Index = () => {
         <span className="absolute text-[30rem] md:text-[50rem] font-barlow font-extrabold text-gold opacity-[0.04] select-none pointer-events-none leading-none z-10" aria-hidden="true">§</span>
 
         <div className="relative z-10 text-center max-w-3xl mx-auto animate-fade-in-up">
-          <p className="text-lima text-xs font-inter tracking-[0.3em] uppercase mb-6 animate-fade-in-up">
-            Caruaru · Inauguração em breve
-          </p>
           <h1 className="font-barlow font-extrabold text-3xl md:text-5xl lg:text-6xl leading-tight mb-6">
-            Atenda no padrão que seus<br />pacientes <span className="text-lima">merecem</span>.
+            O padrão não é um diferencial,<br />é o nosso <span className="text-lima">padrão</span>.
           </h1>
-          <p className="text-foreground/70 text-base md:text-lg mb-10 font-inter max-w-2xl mx-auto animate-fade-in-up-delay-1">
-            Salas equipadas por turno ou espaço fixo personalizado — estrutura profissional,
-            recepção, sala de esterilização e um ambiente que impressiona desde a entrada.
+          <p className="text-foreground text-base md:text-lg mb-10 font-inter max-w-xl mx-auto animate-fade-in-up-delay-1">
+            Espaço premium para profissionais de saúde autônomos. Fase final de construção.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center animate-fade-in-up-delay-2">
-            <Button
-              size="lg"
-              onClick={() => openModal()}
-              className="bg-lima text-primary-foreground hover:bg-lima/90 font-inter text-sm font-semibold gap-2"
-            >
-              <Calendar className="h-4 w-4" />
-              Quero agendar uma visita
-            </Button>
-            <a href={whatsapp ? `https://wa.me/${whatsapp}` : "#"} target="_blank" rel="noopener noreferrer">
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-foreground/20 hover:bg-foreground/5 font-inter text-sm gap-2 w-full"
-              >
-                Falar no WhatsApp
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up-delay-2">
+            <Link to="/espacos">
+              <Button variant="outline" size="lg" className="border-foreground/20 hover:bg-foreground/5 font-inter text-sm tracking-wide">
+                Conhecer os espaços
               </Button>
-            </a>
+            </Link>
+            <Button size="lg" onClick={() => openModal()} className="bg-lima text-primary-foreground hover:bg-lima/90 font-inter text-sm tracking-wide font-semibold">
+              Quero ser contatado
+            </Button>
           </div>
         </div>
       </section>
@@ -378,87 +365,6 @@ const Index = () => {
                 >
                   Quero saber mais <ChevronRight className="h-3 w-3" />
                 </Button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FUNDADORA */}
-      <section className="py-24 px-4 bg-background">
-        <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <div className="relative">
-            <img
-              src="/renders/2486D414-02FC-4762-A0B0-FDD561A8A393.png"
-              alt="Dra. Emanuelly Pedrosa"
-              className="w-full aspect-[3/4] object-cover object-top border border-border"
-            />
-            <div className="absolute bottom-0 left-0 right-0 bg-background/80 backdrop-blur-sm p-4 border-t border-border">
-              <p className="font-barlow font-bold text-sm">Dra. Emanuelly Pedrosa</p>
-              <p className="text-xs text-muted-foreground font-inter">Cirurgiã-Dentista · Fundadora</p>
-            </div>
-          </div>
-          <div className="space-y-6">
-            <p className="text-xs text-lima font-inter tracking-[0.25em] uppercase">Nossa Fundadora</p>
-            <h2 className="font-barlow font-extrabold text-3xl md:text-4xl leading-tight">
-              Uma trajetória construída com propósito
-            </h2>
-            <blockquote className="border-l-2 border-lima pl-5 py-1">
-              <p className="font-barlow font-light text-xl md:text-2xl text-foreground/90 italic leading-snug">
-                "Cada paciente atendido foi um passo para a construção de quem sou hoje."
-              </p>
-            </blockquote>
-            <p className="text-muted-foreground font-inter leading-relaxed text-sm">
-              Formada em 2018 pela ASCES-UNITA, com pós em Endodontia, residência em Harmonização
-              Orofacial e pós em Dentística Estética, a Dra. Emanuelly trilhou uma trajetória marcada
-              por desafios, perdas e superação — incluindo a perda dos seus pais durante a pandemia.
-            </p>
-            <p className="text-muted-foreground font-inter leading-relaxed text-sm">
-              Em 2021, fundou a Clínica Dra. Emanuelly Pedrosa, referência em odontologia estética
-              humanizada na região. Hoje, movida por um propósito maior, cria a Pedrosa Santé —
-              um espaço profissional que vai além da estética e transforma vidas.
-            </p>
-            <div className="grid grid-cols-2 gap-3 pt-2">
-              {[
-                "Cirurgiã-Dentista ASCES-UNITA 2018",
-                "Pós-Graduada em Endodontia",
-                "Residência em Harmonização Orofacial",
-                "Pós em Dentística Estética",
-              ].map((item) => (
-                <div key={item} className="flex items-center gap-2">
-                  <div className="h-1 w-1 rounded-full bg-lima shrink-0" />
-                  <span className="text-xs text-muted-foreground font-inter">{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* QUEM SOMOS — INSTITUCIONAL */}
-      <section className="py-24 px-4 bg-surface">
-        <div className="container mx-auto max-w-3xl text-center">
-          <div className="flex justify-center mb-10">
-            <img src="/renders/Logo 1_White.png" alt="Pedrosa Santé" className="h-10 opacity-50" />
-          </div>
-          <h2 className="font-barlow font-extrabold text-2xl md:text-4xl mb-6">
-            Um espaço pronto para você<br />atender com estrutura profissional
-          </h2>
-          <p className="text-muted-foreground font-inter leading-relaxed text-sm md:text-base mb-12 max-w-xl mx-auto">
-            A Pedrosa Santé nasce para elevar o padrão de cuidado em saúde em Caruaru e região.
-            Um conceito inovador onde profissionais de diversas especialidades encontram
-            estrutura de alto nível, recepção profissional e um ambiente que valoriza tanto
-            o profissional quanto o paciente.
-          </p>
-          <div className="grid md:grid-cols-3 gap-8 pt-12 border-t border-border">
-            {[
-              { label: "Missão", text: "Oferecer estrutura profissional de alto padrão para que cada profissional de saúde possa atender com excelência." },
-              { label: "Visão", text: "Ser referência em saúde integrada e formação profissional em Caruaru e região." },
-              { label: "Valores", text: "Fé, propósito, ética, excelência, cuidado com o próximo e compromisso com resultados reais." },
-            ].map((item) => (
-              <div key={item.label} className="space-y-2">
-                <p className="text-xs text-lima font-inter tracking-[0.2em] uppercase">{item.label}</p>
-                <p className="text-sm text-muted-foreground font-inter leading-relaxed">{item.text}</p>
               </div>
             ))}
           </div>
