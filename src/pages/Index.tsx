@@ -60,12 +60,12 @@ const Index = () => {
           className="absolute inset-0 w-full h-full object-cover"
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-primary/75" aria-hidden="true" />
+        <div className="absolute inset-0 bg-black/35" aria-hidden="true" />
         <span className="absolute text-[30rem] md:text-[50rem] font-barlow font-extrabold text-gold opacity-[0.04] select-none pointer-events-none leading-none z-10" aria-hidden="true">§</span>
 
         <div className="relative z-10 text-center max-w-3xl mx-auto animate-fade-in-up">
           <h1 className="font-barlow font-extrabold text-3xl md:text-5xl lg:text-6xl leading-tight mb-6">
-            O padrão não é um diferencial,<br />é o nosso <span className="text-lima">padrão</span>.
+            O que muitos chamam de diferencial,<br />aqui é <span className="text-lima">padrão</span>.
           </h1>
           <p className="text-foreground text-base md:text-lg mb-10 font-inter max-w-xl mx-auto animate-fade-in-up-delay-1">
             Espaço premium para profissionais de saúde autônomos. Fase final de construção.
@@ -77,7 +77,7 @@ const Index = () => {
               </Button>
             </Link>
             <Button size="lg" onClick={() => openModal()} className="bg-lima text-primary-foreground hover:bg-lima/90 font-inter text-sm tracking-wide font-semibold">
-              Quero ser contatado
+              Quero saber mais
             </Button>
           </div>
         </div>
