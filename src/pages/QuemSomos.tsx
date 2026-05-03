@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import symbolWhite from "@/assets/symbol-white.png";
 
 const QuemSomos = () => {
   return (
@@ -168,10 +169,10 @@ const QuemSomos = () => {
       {/* COMO SURGIMOS */}
       <section className="relative overflow-hidden py-24 px-4 bg-background">
         <img
-          src="/renders/logo do simbolo branco Symbol_02.jpg"
+          src={symbolWhite}
           alt=""
           aria-hidden="true"
-          className="absolute right-0 top-1/2 -translate-y-1/2 h-[80%] max-h-[600px] opacity-[0.04] select-none pointer-events-none object-contain"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[90%] max-h-[700px] opacity-[0.03] select-none pointer-events-none object-contain"
         />
         <div className="container mx-auto max-w-4xl">
           <div className="grid md:grid-cols-2 gap-16 items-start">
