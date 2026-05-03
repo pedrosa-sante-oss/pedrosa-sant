@@ -14,6 +14,143 @@ export type Database = {
   }
   public: {
     Tables: {
+      app_settings: {
+        Row: {
+          key: string
+          updated_at: string | null
+          value: string | null
+        }
+        Insert: {
+          key: string
+          updated_at?: string | null
+          value?: string | null
+        }
+        Update: {
+          key?: string
+          updated_at?: string | null
+          value?: string | null
+        }
+        Relationships: []
+      }
+      bank_accounts: {
+        Row: {
+          active: boolean | null
+          bank: string | null
+          created_at: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          active?: boolean | null
+          bank?: string | null
+          created_at?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          active?: boolean | null
+          bank?: string | null
+          created_at?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      bookings: {
+        Row: {
+          created_at: string | null
+          date: string
+          id: string
+          notes: string | null
+          period: string
+          requested_by: string
+          room_id: string
+          status: string
+          tenant_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          date: string
+          id?: string
+          notes?: string | null
+          period: string
+          requested_by?: string
+          room_id: string
+          status?: string
+          tenant_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          date?: string
+          id?: string
+          notes?: string | null
+          period?: string
+          requested_by?: string
+          room_id?: string
+          status?: string
+          tenant_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_room_id_fkey"
+            columns: ["room_id"]
+            isOneToOne: false
+            referencedRelation: "rooms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      expenses: {
+        Row: {
+          amount: number
+          bank_account_id: string | null
+          category: string
+          created_at: string | null
+          date: string
+          description: string
+          id: string
+          notes: string | null
+        }
+        Insert: {
+          amount: number
+          bank_account_id?: string | null
+          category: string
+          created_at?: string | null
+          date: string
+          description: string
+          id?: string
+          notes?: string | null
+        }
+        Update: {
+          amount?: number
+          bank_account_id?: string | null
+          category?: string
+          created_at?: string | null
+          date?: string
+          description?: string
+          id?: string
+          notes?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "expenses_bank_account_id_fkey"
+            columns: ["bank_account_id"]
+            isOneToOne: false
+            referencedRelation: "bank_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       leads: {
         Row: {
           created_at: string
@@ -50,6 +187,87 @@ export type Database = {
         }
         Relationships: []
       }
+      payments: {
+        Row: {
+          amount: number
+          bank_account_id: string | null
+          booking_id: string | null
+          created_at: string | null
+          due_date: string | null
+          id: string
+          notes: string | null
+          paid_at: string | null
+          status: string
+        }
+        Insert: {
+          amount: number
+          bank_account_id?: string | null
+          booking_id?: string | null
+          created_at?: string | null
+          due_date?: string | null
+          id?: string
+          notes?: string | null
+          paid_at?: string | null
+          status?: string
+        }
+        Update: {
+          amount?: number
+          bank_account_id?: string | null
+          booking_id?: string | null
+          created_at?: string | null
+          due_date?: string | null
+          id?: string
+          notes?: string | null
+          paid_at?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_bank_account_id_fkey"
+            columns: ["bank_account_id"]
+            isOneToOne: false
+            referencedRelation: "bank_accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payments_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rooms: {
+        Row: {
+          active: boolean | null
+          created_at: string | null
+          description: string | null
+          id: string
+          name: string
+          photo_url: string | null
+          sort_order: number | null
+        }
+        Insert: {
+          active?: boolean | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name: string
+          photo_url?: string | null
+          sort_order?: number | null
+        }
+        Update: {
+          active?: boolean | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name?: string
+          photo_url?: string | null
+          sort_order?: number | null
+        }
+        Relationships: []
+      }
       site_content: {
         Row: {
           id: string
@@ -74,222 +292,42 @@ export type Database = {
         }
         Relationships: []
       }
-      rooms: {
-        Row: {
-          id: string
-          name: string
-          description: string | null
-          photo_url: string | null
-          active: boolean
-          sort_order: number
-          created_at: string
-        }
-        Insert: {
-          id?: string
-          name: string
-          description?: string | null
-          photo_url?: string | null
-          active?: boolean
-          sort_order?: number
-          created_at?: string
-        }
-        Update: {
-          id?: string
-          name?: string
-          description?: string | null
-          photo_url?: string | null
-          active?: boolean
-          sort_order?: number
-          created_at?: string
-        }
-        Relationships: []
-      }
       tenants: {
         Row: {
-          id: string
-          user_id: string | null
-          name: string
+          active: boolean | null
+          created_at: string | null
           email: string
+          id: string
+          invite_token: string | null
+          name: string
+          notes: string | null
           phone: string | null
           specialty: string | null
-          active: boolean
-          invite_token: string
-          notes: string | null
-          created_at: string
+          user_id: string | null
         }
         Insert: {
-          id?: string
-          user_id?: string | null
-          name: string
+          active?: boolean | null
+          created_at?: string | null
           email: string
+          id?: string
+          invite_token?: string | null
+          name: string
+          notes?: string | null
           phone?: string | null
           specialty?: string | null
-          active?: boolean
-          invite_token?: string
-          notes?: string | null
-          created_at?: string
-        }
-        Update: {
-          id?: string
           user_id?: string | null
-          name?: string
+        }
+        Update: {
+          active?: boolean | null
+          created_at?: string | null
           email?: string
+          id?: string
+          invite_token?: string | null
+          name?: string
+          notes?: string | null
           phone?: string | null
           specialty?: string | null
-          active?: boolean
-          invite_token?: string
-          notes?: string | null
-          created_at?: string
-        }
-        Relationships: []
-      }
-      bookings: {
-        Row: {
-          id: string
-          room_id: string
-          tenant_id: string
-          date: string
-          period: "manha" | "tarde" | "dia_todo"
-          status: "pending" | "confirmed" | "cancelled"
-          notes: string | null
-          requested_by: "tenant" | "secretary"
-          created_at: string
-          updated_at: string
-        }
-        Insert: {
-          id?: string
-          room_id: string
-          tenant_id: string
-          date: string
-          period: "manha" | "tarde" | "dia_todo"
-          status?: "pending" | "confirmed" | "cancelled"
-          notes?: string | null
-          requested_by?: "tenant" | "secretary"
-          created_at?: string
-          updated_at?: string
-        }
-        Update: {
-          id?: string
-          room_id?: string
-          tenant_id?: string
-          date?: string
-          period?: "manha" | "tarde" | "dia_todo"
-          status?: "pending" | "confirmed" | "cancelled"
-          notes?: string | null
-          requested_by?: "tenant" | "secretary"
-          created_at?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
-      bank_accounts: {
-        Row: {
-          id: string
-          name: string
-          bank: string | null
-          active: boolean
-          created_at: string
-        }
-        Insert: {
-          id?: string
-          name: string
-          bank?: string | null
-          active?: boolean
-          created_at?: string
-        }
-        Update: {
-          id?: string
-          name?: string
-          bank?: string | null
-          active?: boolean
-          created_at?: string
-        }
-        Relationships: []
-      }
-      payments: {
-        Row: {
-          id: string
-          booking_id: string | null
-          amount: number
-          due_date: string | null
-          paid_at: string | null
-          bank_account_id: string | null
-          status: "pending" | "paid" | "overdue"
-          notes: string | null
-          created_at: string
-        }
-        Insert: {
-          id?: string
-          booking_id?: string | null
-          amount: number
-          due_date?: string | null
-          paid_at?: string | null
-          bank_account_id?: string | null
-          status?: "pending" | "paid" | "overdue"
-          notes?: string | null
-          created_at?: string
-        }
-        Update: {
-          id?: string
-          booking_id?: string | null
-          amount?: number
-          due_date?: string | null
-          paid_at?: string | null
-          bank_account_id?: string | null
-          status?: "pending" | "paid" | "overdue"
-          notes?: string | null
-          created_at?: string
-        }
-        Relationships: []
-      }
-      expenses: {
-        Row: {
-          id: string
-          description: string
-          category: string
-          amount: number
-          date: string
-          bank_account_id: string | null
-          notes: string | null
-          created_at: string
-        }
-        Insert: {
-          id?: string
-          description: string
-          category: string
-          amount: number
-          date: string
-          bank_account_id?: string | null
-          notes?: string | null
-          created_at?: string
-        }
-        Update: {
-          id?: string
-          description?: string
-          category?: string
-          amount?: number
-          date?: string
-          bank_account_id?: string | null
-          notes?: string | null
-          created_at?: string
-        }
-        Relationships: []
-      }
-      app_settings: {
-        Row: {
-          key: string
-          value: string | null
-          updated_at: string
-        }
-        Insert: {
-          key: string
-          value?: string | null
-          updated_at?: string
-        }
-        Update: {
-          key?: string
-          value?: string | null
-          updated_at?: string
+          user_id?: string | null
         }
         Relationships: []
       }
@@ -298,7 +336,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: { Args: never; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
