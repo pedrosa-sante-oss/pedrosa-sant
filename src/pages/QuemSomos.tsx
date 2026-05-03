@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import symbolWhite from "@/assets/symbol-white.png";
+import logoWhite from "@/assets/logo-white.png";
 
 const QuemSomos = () => {
   return (
@@ -224,7 +225,7 @@ const QuemSomos = () => {
       <section className="py-24 px-4 bg-card">
         <div className="container mx-auto max-w-4xl">
           <div className="flex justify-center mb-12">
-            <img src="/renders/Logo nome branco 1_white.jpg" alt="Pedrosa Santé" className="h-8 opacity-40" />
+            <img src={logoWhite} alt="Pedrosa Santé" className="h-8 opacity-40" />
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-16">
