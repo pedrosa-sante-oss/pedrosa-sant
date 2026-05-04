@@ -14,7 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        barlow: ['Barlow', 'sans-serif'],
+        barlow: ['DM Sans', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+        heading: ['DM Sans', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
       },
       colors: {
