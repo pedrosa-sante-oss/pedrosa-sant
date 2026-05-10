@@ -89,7 +89,7 @@ const Index = () => {
 
         <div className="relative z-10 text-center max-w-3xl mx-auto">
           <p className="text-lima text-xs mb-6 animate-fade-in-up">
-            <BrandName className="tracking-[0.35em]" /> <span className="font-inter tracking-[0.35em] uppercase">· Caruaru-PE</span>
+            <BrandName className="tracking-[0.35em]" />
           </p>
           <h1 className="font-barlow font-extrabold text-4xl md:text-6xl lg:text-7xl leading-[1.05] mb-6 animate-fade-in-up">
             Excelência não é<br />um diferencial,<br />é o nosso <span className="text-lima">padrão</span>.
