@@ -207,16 +207,17 @@ const Index = () => {
                   <Building2 className="h-5 w-5 text-lima" />
                 </div>
                 <h3 className="font-barlow font-bold text-xl mb-3">Seu consultório. Do seu jeito.</h3>
-                <p className="text-muted-foreground font-inter text-sm leading-relaxed mb-6">
+                <p className="text-muted-foreground font-inter text-sm leading-relaxed mb-4">
                   Alugue uma das 3 salas fixas e monte como quiser. Você tem exclusividade
-                  total sobre o espaço — mobília, equipamentos, identidade visual.
+                  total sobre o espaço — mobília, equipamentos e identidade visual.
                   Tudo dentro de um ecossistema profissional de alto padrão.
                 </p>
-                <ul className="space-y-2">
+                <p className="text-xs font-inter font-semibold text-foreground/70 mb-2">Estrutura completa para o seu atendimento:</p>
+                <ul className="space-y-2 mb-4">
                   {[
-                    "Espaço exclusivo, personalização total",
+                    "Espaço exclusivo com personalização total",
                     "Instalação de ar-condicionado inverter obrigatória (energia inclusa no aluguel)",
-                    "Recepção compartilhada (até 3 secretárias)",
+                    "Recepção profissional para acolhimento inicial dos pacientes",
                     "Copa, banheiros e áreas comuns de alto padrão",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2 text-xs text-muted-foreground font-inter">
@@ -225,6 +226,12 @@ const Index = () => {
                     </li>
                   ))}
                 </ul>
+                <div className="border border-border/50 rounded p-3 bg-surface/50">
+                  <p className="text-[10px] font-inter font-semibold text-foreground/60 uppercase tracking-wider mb-1">Importante</p>
+                  <p className="text-xs text-muted-foreground font-inter leading-relaxed">
+                    A recepção oferece suporte inicial aos pacientes (acolhimento e direcionamento). Para gestão de agenda, atendimentos e demandas específicas, é necessário que cada profissional utilize sua própria secretária ou sistema de atendimento.
+                  </p>
+                </div>
                 <Button
                   variant="outline"
                   className="mt-8 border-lima/40 text-lima hover:bg-lima hover:text-primary-foreground font-inter text-xs"
