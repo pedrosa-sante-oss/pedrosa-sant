@@ -1,15 +1,34 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/integrations/supabase/client";
 import symbolWhite from "@/assets/symbol-white.png";
 import logoWhite from "@/assets/logo-white.png";
 
 const QuemSomos = () => {
+  const [heroUrl, setHeroUrl] = useState("/renders/recepcao-nova.jpg");
+  const [foundadoraUrl, setFoundadoraUrl] = useState("/renders/2486D414-02FC-4762-A0B0-FDD561A8A393.png");
+
+  useEffect(() => {
+    supabase
+      .from("app_settings")
+      .select("key, value")
+      .in("key", ["photo_quem_somos_hero", "photo_fundadora"])
+      .then(({ data }) => {
+        if (!data) return;
+        const h = data.find((s) => s.key === "photo_quem_somos_hero")?.value;
+        const f = data.find((s) => s.key === "photo_fundadora")?.value;
+        if (h) setHeroUrl(h);
+        if (f) setFoundadoraUrl(f);
+      });
+  }, []);
+
   return (
     <>
       {/* HERO */}
       <section className="relative flex min-h-[60vh] items-center justify-center overflow-hidden px-4">
         <img
-          src="/renders/recepcao-nova.jpg"
+          src={heroUrl}
           alt=""
           className="absolute inset-0 w-full h-full object-cover"
           aria-hidden="true"
@@ -32,7 +51,7 @@ const QuemSomos = () => {
         <div className="container mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div className="relative">
             <img
-              src="/renders/2486D414-02FC-4762-A0B0-FDD561A8A393.png"
+              src={foundadoraUrl}
               alt="Dra. Emanuelly Pedrosa"
               className="w-full aspect-[3/4] object-cover object-top border border-border"
             />
@@ -56,7 +75,7 @@ const QuemSomos = () => {
 
             <p className="text-muted-foreground font-inter leading-relaxed text-sm">
               Sou Dra. Emanuelly Pedrosa, cirurgiã-dentista formada pela Faculdade ASCES-UNITA em 2018,
-              com 32 anos e apaixonada por transformar vidas através do sorriso.
+              apaixonada por transformar vidas através do sorriso.
             </p>
             <p className="text-muted-foreground font-inter leading-relaxed text-sm">
               Desde o início da minha trajetória, escolhi a odontologia estética como propósito —
@@ -72,13 +91,18 @@ const QuemSomos = () => {
               Hoje, além de cuidar de pacientes, compartilho conhecimento através de mentorias,
               formando profissionais que desejam atuar com segurança, excelência e propósito na estética.
             </p>
+            <p className="text-muted-foreground font-inter leading-relaxed text-sm">
+              Reconhecida como referência em estética dentária em Caruaru e região, sua atuação
+              une técnica de alto nível a um olhar humano e personalizado para cada paciente.
+            </p>
 
             <div className="grid grid-cols-2 gap-3 pt-2">
               {[
                 "Cirurgiã-Dentista ASCES-UNITA 2018",
                 "Pós-Graduada em Endodontia",
                 "Residência em Harmonização Orofacial",
-                "Pós em Dentística Estética",
+                "Especialista em Estética Dentária",
+                "Referência em Estética Dentária em Caruaru",
               ].map((item) => (
                 <div key={item} className="flex items-center gap-2">
                   <div className="h-1 w-1 rounded-full bg-lima shrink-0" />
@@ -113,7 +137,7 @@ const QuemSomos = () => {
               {
                 year: "2019–2020",
                 title: "Os primeiros desafios",
-                text: "Atuou em clínicas com pouca estrutura, enfrentando limitações e baixa valorização. Situações que exigiram muito mais do que conhecimento técnico — exigiram força emocional, resiliência e fé.",
+                text: "Atuou em clínicas com pouca estrutura e também no SUS, enfrentando limitações e baixa valorização. Situações que exigiram muito mais do que conhecimento técnico — exigiram força emocional, resiliência e fé.",
                 side: "left",
               },
               {
@@ -136,7 +160,7 @@ const QuemSomos = () => {
               },
             ].map((item) => (
               <div key={item.year} className={`relative flex md:items-center gap-8 mb-12 ${item.side === "left" ? "md:flex-row-reverse" : "md:flex-row"} flex-row pl-12 md:pl-0`}>
-                <div className="flex-1 md:text-right">
+                <div className={`flex-1 md:text-right ${item.side === "left" ? "hidden md:block" : ""}`}>
                   {item.side === "right" && (
                     <div className="border border-border bg-background p-6 hover:border-lima/30 transition-colors">
                       <p className="text-xs text-lima font-inter tracking-widest uppercase mb-2">{item.year}</p>
@@ -152,7 +176,7 @@ const QuemSomos = () => {
                   </div>
                 </div>
 
-                <div className="flex-1">
+                <div className={`flex-1 ${item.side === "right" ? "hidden md:block" : ""}`}>
                   {item.side === "left" && (
                     <div className="border border-border bg-background p-6 hover:border-lima/30 transition-colors">
                       <p className="text-xs text-lima font-inter tracking-widest uppercase mb-2">{item.year}</p>

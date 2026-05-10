@@ -8,7 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Calendar, Building2, Star, Clock, MapPin, Stethoscope, Sparkles, Shield, Users, ChevronRight } from "lucide-react";
 
-const heroImages = [
+const HERO_DEFAULTS = [
   "/renders/recepcao-nova.jpg",
   "/renders/recepcao-02.jpg",
   "/renders/recepcao-03.jpg",
@@ -22,18 +22,24 @@ const Index = () => {
   const [ctaForm, setCtaForm] = useState({ name: "", specialty: "", phone: "" });
   const [whatsapp, setWhatsapp] = useState("");
   const [heroIdx, setHeroIdx] = useState(0);
+  const [heroImages, setHeroImages] = useState(HERO_DEFAULTS);
 
   useEffect(() => {
     supabase
       .from("app_settings")
-      .select("value")
-      .eq("key", "whatsapp_number")
-      .single()
-      .then(({ data }) => { if (data?.value) setWhatsapp(data.value); });
+      .select("key, value")
+      .in("key", ["whatsapp_number", "photo_hero_1", "photo_hero_2", "photo_hero_3", "photo_hero_4"])
+      .then(({ data }) => {
+        if (!data) return;
+        const wp = data.find((s) => s.key === "whatsapp_number")?.value;
+        if (wp) setWhatsapp(wp);
+        const overrides = HERO_DEFAULTS.map((d, i) => data.find((s) => s.key === `photo_hero_${i + 1}`)?.value || d);
+        setHeroImages(overrides);
+      });
   }, []);
 
   useEffect(() => {
-    const timer = setInterval(() => setHeroIdx((i) => (i + 1) % heroImages.length), 5000);
+    const timer = setInterval(() => setHeroIdx((i) => (i + 1) % HERO_DEFAULTS.length), 5000);
     return () => clearInterval(timer);
   }, []);
 

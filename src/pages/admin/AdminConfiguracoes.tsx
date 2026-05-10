@@ -5,10 +5,19 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Send } from "lucide-react";
+import { Plus, Send, Upload } from "lucide-react";
 import { toast } from "sonner";
 
 interface BankAccount { id: string; name: string; bank: string | null; active: boolean; }
+
+const PHOTO_SLOTS = [
+  { key: "photo_hero_1", label: "Carousel da Home — Foto 1", fallback: "/renders/recepcao-nova.jpg" },
+  { key: "photo_hero_2", label: "Carousel da Home — Foto 2", fallback: "/renders/recepcao-02.jpg" },
+  { key: "photo_hero_3", label: "Carousel da Home — Foto 3", fallback: "/renders/recepcao-03.jpg" },
+  { key: "photo_hero_4", label: "Carousel da Home — Foto 4", fallback: "/renders/recepcao-04.jpg" },
+  { key: "photo_quem_somos_hero", label: "Quem Somos — Foto do hero", fallback: "/renders/recepcao-nova.jpg" },
+  { key: "photo_fundadora", label: "Quem Somos — Foto da fundadora", fallback: "/renders/2486D414-02FC-4762-A0B0-FDD561A8A393.png" },
+];
 
 const AdminConfiguracoes = () => {
   const [webhookUrl, setWebhookUrl] = useState("");
@@ -20,17 +29,26 @@ const AdminConfiguracoes = () => {
   const [bankAccounts, setBankAccounts] = useState<BankAccount[]>([]);
   const [bankForm, setBankForm] = useState({ name: "", bank: "" });
   const [savingBank, setSavingBank] = useState(false);
+  const [photoUrls, setPhotoUrls] = useState<Record<string, string>>({});
+  const [uploadingSlot, setUploadingSlot] = useState<string | null>(null);
 
   const fetchAll = async () => {
+    const settingKeys = ["datacrazy_webhook_url", "datacrazy_api_key", "whatsapp_number", ...PHOTO_SLOTS.map((s) => s.key)];
     const { data: settings } = await supabase
       .from("app_settings")
       .select("key, value")
-      .in("key", ["datacrazy_webhook_url", "datacrazy_api_key", "whatsapp_number"]);
+      .in("key", settingKeys);
 
     if (settings) {
       setWebhookUrl(settings.find((s) => s.key === "datacrazy_webhook_url")?.value ?? "");
       setApiKey(settings.find((s) => s.key === "datacrazy_api_key")?.value ?? "");
       setWhatsapp(settings.find((s) => s.key === "whatsapp_number")?.value ?? "");
+      const map: Record<string, string> = {};
+      PHOTO_SLOTS.forEach(({ key }) => {
+        const val = settings.find((s) => s.key === key)?.value;
+        if (val) map[key] = val;
+      });
+      setPhotoUrls(map);
     }
 
     const { data: accounts } = await supabase.from("bank_accounts").select("*").order("created_at");
@@ -105,15 +123,32 @@ const AdminConfiguracoes = () => {
     fetchAll();
   };
 
+  const handleUploadPhoto = async (slotKey: string, file: File) => {
+    setUploadingSlot(slotKey);
+    const ext = file.name.split(".").pop() ?? "jpg";
+    const path = `site/${slotKey}.${ext}`;
+    const { error: uploadError } = await supabase.storage
+      .from("room-photos")
+      .upload(path, file, { upsert: true });
+    if (uploadError) { toast.error("Erro ao enviar foto."); setUploadingSlot(null); return; }
+    const { data: urlData } = supabase.storage.from("room-photos").getPublicUrl(path);
+    const url = `${urlData.publicUrl}?t=${Date.now()}`;
+    await supabase.from("app_settings").upsert({ key: slotKey, value: url, updated_at: new Date().toISOString() });
+    setPhotoUrls((prev) => ({ ...prev, [slotKey]: url }));
+    toast.success("Foto atualizada com sucesso.");
+    setUploadingSlot(null);
+  };
+
   return (
     <div>
       <h1 className="font-barlow font-bold text-xl mb-6">Configurações</h1>
 
       <Tabs defaultValue="contato">
-        <TabsList className="bg-surface border border-border mb-6">
+        <TabsList className="bg-surface border border-border mb-6 flex-wrap h-auto gap-1">
           <TabsTrigger value="contato" className="text-xs font-inter data-[state=active]:bg-lima/10 data-[state=active]:text-lima">Contato</TabsTrigger>
           <TabsTrigger value="webhook" className="text-xs font-inter data-[state=active]:bg-lima/10 data-[state=active]:text-lima">Webhook CRM</TabsTrigger>
           <TabsTrigger value="contas" className="text-xs font-inter data-[state=active]:bg-lima/10 data-[state=active]:text-lima">Contas Bancárias</TabsTrigger>
+          <TabsTrigger value="fotos" className="text-xs font-inter data-[state=active]:bg-lima/10 data-[state=active]:text-lima">Fotos do Site</TabsTrigger>
         </TabsList>
 
         {/* CONTATO */}
@@ -259,6 +294,45 @@ const AdminConfiguracoes = () => {
                 )}
               </TableBody>
             </Table>
+          </div>
+        </TabsContent>
+
+        {/* FOTOS DO SITE */}
+        <TabsContent value="fotos">
+          <p className="text-xs text-muted-foreground font-inter mb-6">
+            Troque as fotos exibidas no site. As imagens são salvas automaticamente após o envio.
+          </p>
+          <div className="grid gap-4 max-w-2xl">
+            {PHOTO_SLOTS.map((slot) => (
+              <div key={slot.key} className="border border-border bg-surface rounded p-4">
+                <p className="text-sm font-barlow font-bold mb-3">{slot.label}</p>
+                <div className="flex gap-4 items-start">
+                  <img
+                    src={photoUrls[slot.key] || slot.fallback}
+                    alt=""
+                    className="h-24 w-36 object-cover border border-border rounded shrink-0"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs text-muted-foreground font-inter mb-3">
+                      {photoUrls[slot.key] ? "Foto personalizada ativa" : "Usando foto padrão"}
+                    </p>
+                    <label className={`inline-flex items-center gap-2 text-xs font-inter border border-border rounded px-3 py-1.5 cursor-pointer hover:bg-background transition-colors ${uploadingSlot === slot.key ? "opacity-50 pointer-events-none" : ""}`}>
+                      <Upload className="h-3 w-3" />
+                      {uploadingSlot === slot.key ? "Enviando..." : "Trocar foto"}
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="sr-only"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) handleUploadPhoto(slot.key, file);
+                        }}
+                      />
+                    </label>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </TabsContent>
       </Tabs>
