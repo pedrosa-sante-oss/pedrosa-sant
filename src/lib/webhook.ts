@@ -13,6 +13,7 @@ export interface WebhookBookingPayload {
 const PERIOD_LABELS: Record<string, string> = {
   manha: "Manhã",
   tarde: "Tarde",
+  noite: "Noite (18h–22h)",
   dia_todo: "Dia todo",
 };
 

@@ -25,7 +25,7 @@ interface Booking {
   tenant: { name: string; phone: string | null; specialty: string | null } | null;
 }
 
-const PERIOD_LABELS: Record<string, string> = { manha: "Manhã", tarde: "Tarde", dia_todo: "Dia todo" };
+const PERIOD_LABELS: Record<string, string> = { manha: "Manhã", tarde: "Tarde", noite: "Noite (18h–22h)", dia_todo: "Dia todo" };
 const STATUS: Record<string, { label: string; className: string }> = {
   pending: { label: "Pendente", className: "border-yellow-500/30 text-yellow-400" },
   confirmed: { label: "Confirmada", className: "border-green-500/30 text-green-400" },

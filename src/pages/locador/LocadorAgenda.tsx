@@ -27,6 +27,7 @@ interface Booking {
 const PERIOD_LABELS: Record<string, string> = {
   manha: "Manhã",
   tarde: "Tarde",
+  noite: "Noite (18h–22h)",
   dia_todo: "Dia todo",
 };
 
@@ -284,8 +285,9 @@ const LocadorAgenda = () => {
                   <SelectValue placeholder="Selecionar período" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="manha" className="font-inter text-sm">Manhã</SelectItem>
-                  <SelectItem value="tarde" className="font-inter text-sm">Tarde</SelectItem>
+                  <SelectItem value="manha" className="font-inter text-sm">Manhã (08h–12h)</SelectItem>
+                  <SelectItem value="tarde" className="font-inter text-sm">Tarde (14h–18h)</SelectItem>
+                  <SelectItem value="noite" className="font-inter text-sm">Noite (18h–22h)</SelectItem>
                   <SelectItem value="dia_todo" className="font-inter text-sm">Dia todo</SelectItem>
                 </SelectContent>
               </Select>
