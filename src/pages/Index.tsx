@@ -179,7 +179,7 @@ const Index = () => {
                   {[
                     "Sala odontológica equipada (cadeira, compressor, refletor, sugador)",
                     "Sala clínica para medicina, psicologia, nutrição e mais",
-                    "Sala de esterilização inclusa para dentistas",
+                    "Sala de esterilização inclusa.",
                     "Recepção profissional com suporte",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2 text-xs text-muted-foreground font-inter">
