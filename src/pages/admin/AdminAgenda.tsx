@@ -91,6 +91,7 @@ const AdminAgenda = () => {
     setSavingTenant(true);
     const { data, error } = await supabase.from("tenants").insert({
       name: newTenantForm.name.trim(),
+      email: `${newTenantForm.name.trim().toLowerCase().replace(/\s+/g, ".")}@pendente.local`,
       phone: newTenantForm.phone.trim() || null,
       specialty: newTenantForm.specialty.trim() || null,
     }).select("id, name, phone, specialty").single();
