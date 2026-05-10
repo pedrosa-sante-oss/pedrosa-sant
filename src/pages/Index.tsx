@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import LeadFormModal from "@/components/LeadFormModal";
 import ScrollReveal from "@/components/ScrollReveal";
+import BrandName from "@/components/BrandName";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Calendar, Building2, Star, Clock, MapPin, Stethoscope, Sparkles, Shield, Users, ChevronRight } from "lucide-react";
@@ -87,8 +88,8 @@ const Index = () => {
         <span className="absolute text-[30rem] md:text-[50rem] font-barlow font-extrabold text-gold opacity-[0.03] select-none pointer-events-none leading-none z-10" aria-hidden="true">§</span>
 
         <div className="relative z-10 text-center max-w-3xl mx-auto">
-          <p className="text-lima text-xs font-inter tracking-[0.35em] uppercase mb-6 animate-fade-in-up">
-            Pedrosa Santé · Caruaru-PE
+          <p className="text-lima text-xs mb-6 animate-fade-in-up">
+            <BrandName className="tracking-[0.35em]" /> <span className="font-inter tracking-[0.35em] uppercase">· Caruaru-PE</span>
           </p>
           <h1 className="font-barlow font-extrabold text-4xl md:text-6xl lg:text-7xl leading-[1.05] mb-6 animate-fade-in-up">
             Excelência não é<br />um diferencial,<br />é o nosso <span className="text-lima">padrão</span>.

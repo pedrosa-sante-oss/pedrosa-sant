@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Award, Heart, Sparkles, Shield, ArrowRight } from "lucide-react";
+import BrandName from "@/components/BrandName";
 
 const pillars = [
   { icon: Award, title: "Excelência", desc: "Alto nível de qualificação dos profissionais envolvidos. Espaço que transmite autoridade e credibilidade a cada paciente que entra." },
@@ -23,7 +24,7 @@ const ParaVoce = () => (
       <span className="absolute text-[20rem] md:text-[35rem] font-barlow font-extrabold text-gold opacity-[0.04] select-none pointer-events-none leading-none">§</span>
       <div className="relative z-10 text-center max-w-2xl animate-fade-in-up">
         <h1 className="font-barlow font-extrabold text-3xl md:text-5xl mb-4">Você merece um espaço à altura do seu <span className="text-lima">trabalho</span></h1>
-        <p className="text-muted-foreground font-inter text-sm md:text-base">Descubra por que profissionais de saúde estão escolhendo a Pedrosa Santé.</p>
+        <p className="text-muted-foreground font-inter text-sm md:text-base">Descubra por que profissionais de saúde estão escolhendo a <BrandName />.</p>
       </div>
     </section>
 

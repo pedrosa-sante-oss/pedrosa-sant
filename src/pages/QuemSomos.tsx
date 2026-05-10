@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import symbolWhite from "@/assets/symbol-white.png";
 import logoWhite from "@/assets/logo-white.png";
+import BrandName from "@/components/BrandName";
 
 const QuemSomos = () => {
   const [heroUrl, setHeroUrl] = useState("/renders/recepcao-nova.jpg");
@@ -36,7 +37,7 @@ const QuemSomos = () => {
         <div className="absolute inset-0 bg-black/65" aria-hidden="true" />
         <span className="absolute text-[20rem] md:text-[35rem] font-barlow font-extrabold text-gold opacity-[0.04] select-none pointer-events-none leading-none z-10" aria-hidden="true">§</span>
         <div className="relative z-10 text-center max-w-2xl mx-auto">
-          <p className="text-lima text-xs font-inter tracking-[0.3em] uppercase mb-6">Pedrosa Santé</p>
+          <p className="text-lima text-xs mb-6"><BrandName className="tracking-[0.3em]" /></p>
           <h1 className="font-barlow font-extrabold text-3xl md:text-5xl leading-tight mb-6">
             A história por trás do espaço
           </h1>
@@ -154,7 +155,7 @@ const QuemSomos = () => {
               },
               {
                 year: "2026",
-                title: "A Pedrosa Santé",
+                title: "A PEDROSA — SANTÉ",
                 text: "A materialização de tudo. Um centro integrado de saúde que vai além da odontologia — unindo especialidades, promovendo cuidado completo e formando profissionais de excelência.",
                 side: "right",
               },
@@ -207,7 +208,7 @@ const QuemSomos = () => {
                 Mais do que uma clínica.<br />Um novo conceito.
               </h2>
               <p className="text-muted-foreground font-inter leading-relaxed text-sm">
-                A Pedrosa Santé nasce com um propósito claro: elevar o padrão de cuidado em saúde,
+                A <BrandName /> nasce com um propósito claro: elevar o padrão de cuidado em saúde,
                 estética e performance em Caruaru e região.
               </p>
               <p className="text-muted-foreground font-inter leading-relaxed text-sm">
@@ -267,7 +268,7 @@ const QuemSomos = () => {
 
           <div className="border-t border-border pt-16 text-center">
             <p className="font-barlow font-light text-xl md:text-2xl text-foreground/80 italic max-w-2xl mx-auto leading-relaxed mb-10">
-              "A Pedrosa Santé não é apenas uma clínica. É a continuidade de uma história
+              "A <BrandName className="not-italic font-normal" /> não é apenas uma clínica. É a continuidade de uma história
               construída com coragem, propósito e a certeza de que grandes sonhos nascem,
               crescem e se realizam para impactar muitas outras vidas."
             </p>
