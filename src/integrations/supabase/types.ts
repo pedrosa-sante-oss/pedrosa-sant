@@ -292,6 +292,66 @@ export type Database = {
         }
         Relationships: []
       }
+      tenant_charges: {
+        Row: {
+          amount: number
+          booking_id: string | null
+          created_at: string | null
+          date: string
+          description: string
+          id: string
+          notes: string | null
+          paid_at: string | null
+          quantity: number
+          status: string
+          tenant_id: string
+          unit_price: number
+        }
+        Insert: {
+          amount: number
+          booking_id?: string | null
+          created_at?: string | null
+          date?: string
+          description: string
+          id?: string
+          notes?: string | null
+          paid_at?: string | null
+          quantity?: number
+          status?: string
+          tenant_id: string
+          unit_price: number
+        }
+        Update: {
+          amount?: number
+          booking_id?: string | null
+          created_at?: string | null
+          date?: string
+          description?: string
+          id?: string
+          notes?: string | null
+          paid_at?: string | null
+          quantity?: number
+          status?: string
+          tenant_id?: string
+          unit_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tenant_charges_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tenant_charges_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tenants: {
         Row: {
           active: boolean | null
