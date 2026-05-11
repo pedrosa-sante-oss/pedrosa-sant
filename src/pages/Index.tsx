@@ -387,7 +387,7 @@ const Index = () => {
               {[
                 { icon: Building2, title: "2 salas prontas por turno", desc: "Odontológica + Clínica geral, equipadas e disponíveis" },
                 { icon: Star, title: "3 salas para locação fixa", desc: "Personalize com sua identidade, seu jeito, sua marca" },
-                { icon: Users, title: "Recepção para até 3 secretárias", desc: "Tanto para profissionais fixos quanto para quem atende por turno" },
+                { icon: Users, title: "Recepção e acolhimento profissional", desc: "Recepção compartilhada para suporte inicial e direcionamento dos pacientes." },
                 { icon: Shield, title: "Sala de esterilização", desc: "Inclusa, sem custo adicional" },
                 { icon: Stethoscope, title: "Copa compartilhada", desc: "Área de descanso e preparo para toda a equipe" },
                 { icon: Sparkles, title: "Ar-condicionado inverter", desc: "Obrigatório nas salas fixas. Energia inclusa no aluguel." },
