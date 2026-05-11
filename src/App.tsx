@@ -25,6 +25,7 @@ import AdminAgenda from "./pages/admin/AdminAgenda";
 import AdminReservas from "./pages/admin/AdminReservas";
 import AdminFinanceiro from "./pages/admin/AdminFinanceiro";
 import AdminConfiguracoes from "./pages/admin/AdminConfiguracoes";
+import AdminConsumo from "./pages/admin/AdminConsumo";
 
 // Tenant (locador) pages
 import LocadorLogin from "./pages/locador/LocadorLogin";
@@ -63,6 +64,7 @@ const App = () => (
             <Route path="reservas" element={<AdminReservas />} />
             <Route path="locadores" element={<AdminLocadores />} />
             <Route path="financeiro" element={<AdminFinanceiro />} />
+            <Route path="consumo" element={<AdminConsumo />} />
             <Route path="conteudo" element={<AdminConteudo />} />
             <Route path="configuracoes" element={<AdminConfiguracoes />} />
           </Route>

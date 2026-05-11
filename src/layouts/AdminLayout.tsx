@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import {
   LayoutDashboard, Users, FileText, LogOut,
   ImageIcon, CalendarDays, ClipboardList, UserCheck,
-  DollarSign, Settings, Minus,
+  DollarSign, Settings, Minus, ShoppingCart,
 } from "lucide-react";
 
 const mainLinks = [
@@ -18,6 +18,7 @@ const erpLinks = [
   { to: "/admin/reservas", label: "Reservas", icon: ClipboardList },
   { to: "/admin/locadores", label: "Locadores", icon: UserCheck },
   { to: "/admin/financeiro", label: "Financeiro", icon: DollarSign },
+  { to: "/admin/consumo", label: "Consumo", icon: ShoppingCart },
 ];
 
 const systemLinks = [

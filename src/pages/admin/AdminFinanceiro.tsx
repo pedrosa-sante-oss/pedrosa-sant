@@ -60,12 +60,7 @@ interface ReceiptData {
 
 const EXPENSE_CATEGORIES = ["Aluguel", "Energia", "Água", "Internet", "Manutenção", "Limpeza", "Material", "Outros"];
 const PERIOD_LABELS: Record<string, string> = { manha: "Manhã", tarde: "Tarde", noite: "Noite", dia_todo: "Dia todo" };
-const ITEMS_PADRAO = [
-  { label: "Cápsula de café", price: 3.00 },
-  { label: "Refrigerante em lata", price: 5.00 },
-  { label: "Coffee break", price: 20.00 },
-  { label: "Outro", price: 0 },
-];
+interface ConsumableItem { id: string; name: string; price: number; }
 const PAY_STATUS: Record<string, { label: string; className: string }> = {
   pending: { label: "Pendente", className: "border-yellow-500/30 text-yellow-400" },
   paid: { label: "Pago", className: "border-green-500/30 text-green-400" },
@@ -150,6 +145,7 @@ const AdminFinanceiro = () => {
   const [bankAccounts, setBankAccounts] = useState<BankAccount[]>([]);
   const [tenants, setTenants] = useState<Tenant[]>([]);
   const [charges, setCharges] = useState<TenantCharge[]>([]);
+  const [catalogItems, setCatalogItems] = useState<ConsumableItem[]>([]);
   const [whatsapp, setWhatsapp] = useState("");
 
   // Recebimentos filters
@@ -206,6 +202,9 @@ const AdminFinanceiro = () => {
 
     supabase.from("app_settings").select("value").eq("key", "whatsapp_number").single()
       .then(({ data }) => { if (data?.value) setWhatsapp(data.value); });
+
+    supabase.from("consumable_items").select("id, name, price").eq("active", true).order("name")
+      .then(({ data }) => { if (data) setCatalogItems(data as ConsumableItem[]); });
   };
 
   useEffect(() => { fetchAll(); }, []);
@@ -793,11 +792,14 @@ const AdminFinanceiro = () => {
             <div>
               <label className="text-xs text-muted-foreground font-inter block mb-1">Item *</label>
               <Select value={chargeForm.description} onValueChange={(v) => {
-                const item = ITEMS_PADRAO.find(i => i.label === v);
+                const item = [...catalogItems, { id: "outro", name: "Outro", price: 0 }].find(i => i.name === v);
                 setChargeForm({ ...chargeForm, description: v, unit_price: item && item.price > 0 ? item.price.toFixed(2).replace(".", ",") : chargeForm.unit_price });
               }}>
                 <SelectTrigger className="bg-background border-border font-inter text-sm"><SelectValue placeholder="Selecionar item" /></SelectTrigger>
-                <SelectContent>{ITEMS_PADRAO.map(i => <SelectItem key={i.label} value={i.label} className="font-inter text-sm">{i.label}{i.price > 0 ? ` — ${fmt(i.price)}` : ""}</SelectItem>)}</SelectContent>
+                <SelectContent>
+                  {catalogItems.map(i => <SelectItem key={i.id} value={i.name} className="font-inter text-sm">{i.name}{i.price > 0 ? ` — ${fmt(i.price)}` : ""}</SelectItem>)}
+                  <SelectItem value="Outro" className="font-inter text-sm">Outro</SelectItem>
+                </SelectContent>
               </Select>
             </div>
             <div className="grid grid-cols-2 gap-3">
